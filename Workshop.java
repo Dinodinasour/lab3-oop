@@ -19,7 +19,7 @@ public class Workshop<T extends IworkshopCar> {
 
     public T unloadCar(T car) {
         if (!(carList.isEmpty())){
-            car = carList.removeLast();
+            car = carList.remove(carList.size() - 1);
 
 
         }

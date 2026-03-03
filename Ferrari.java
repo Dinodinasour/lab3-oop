@@ -50,7 +50,7 @@ public class Ferrari extends Car implements Truck{
 
     public void unloadCar(){
         if (currentSpeed == 0 && ramp.getAngle() == 45 && !(carList.isEmpty())){
-            Car car = carList.removeLast();
+            Car car = carList.remove(carList.size() - 1);
 
             car.setPosition(this.getPos_x() - 1, this.getPos_y());
         }

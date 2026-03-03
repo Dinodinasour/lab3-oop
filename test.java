@@ -10,6 +10,7 @@ public class test {
     private Saab95 saab = new Saab95();
     private Scania scania = new Scania();
     private Ferrari ferrari = new Ferrari();
+    private Car nyvolvo = new Volvo240();
     private Workshop<Volvo240> volvoWorkshop = new Workshop<Volvo240>(10);
 
     @Test
