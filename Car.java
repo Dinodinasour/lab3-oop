@@ -9,8 +9,8 @@ public abstract class Car implements Movable, IworkshopCar{
     protected String modelName; // The car model name
     protected double pos_x;
     protected double pos_y;
-    protected int dx = 0; // Direction x
-    protected int dy = -1; // Direction y
+    protected int dx = 1; // Direction x
+    protected int dy = 0; // Direction y
 
     public int getNrDoors() {
         return nrDoors;
@@ -72,6 +72,15 @@ public abstract class Car implements Movable, IworkshopCar{
 
     @Override
     public void move() {
+        pos_x = (getPos_x() + currentSpeed * dx);
+        pos_y = (getPos_y() + currentSpeed * dy);
+
+        if (pos_x >= 800 || pos_x <= 0) {
+            dx = (dx + 180) % 360;
+        }
+        if (pos_y >= 800 || pos_y <= 0){
+            dy = (dy + 180) & 360;
+        }
         pos_x = (getPos_x() + currentSpeed * dx);
         pos_y = (getPos_y() + currentSpeed * dy);
     }

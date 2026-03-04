@@ -44,10 +44,6 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
-                if (frame.drawPanel.volvoPoint.x > 800 || frame.drawPanel.volvoPoint.y > 800){
-                    car.turnLeft();
-                    car.turnLeft();
-                }
                 car.move();
                 int x = (int) Math.round(car.getPos_x());
                 int y = (int) Math.round(car.getPos_y());
