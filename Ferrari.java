@@ -15,7 +15,8 @@ public class Ferrari extends Car implements Truck{
      * Truck cannot load other Trucks
      * Cars that are loaded have same position as the Truck
      */
-    public Ferrari(){
+    public Ferrari(int pos_x, int pos_y){
+        super(pos_x, pos_y);
         nrDoors = 2;
         color = Color.pink;
         enginePower = 120;

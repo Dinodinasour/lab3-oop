@@ -1,17 +1,20 @@
 import org.junit.Test;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
 public class test {
-    private Volvo240 volvo = new Volvo240();
-    private Saab95 saab = new Saab95();
-    private Scania scania = new Scania();
-    private Ferrari ferrari = new Ferrari();
-    private Car nyvolvo = new Volvo240();
+    private Volvo240 volvo = new Volvo240(0, 0);
+    private Saab95 saab = new Saab95(0, 200);
+    private Scania scania = new Scania(0, 400);
+    private Ferrari ferrari = new Ferrari(0, 600);
     private Workshop<Volvo240> volvoWorkshop = new Workshop<Volvo240>(10);
+
+    public test() throws IOException {
+    }
 
     @Test
     public void test_volvo_move_without_gas() {
@@ -76,28 +79,24 @@ public class test {
     public void test_move_with_gas_volvo(){
         volvo.gas(0.5);
         volvo.move();
-        assertEquals(0.0, volvo.pos_x, 0.0001);
-        assertNotEquals(0.0, volvo.pos_y, 0.0001);
+        assertEquals(0.0, volvo.getPos_x(), 0.0001);
+        assertNotEquals(0.0, volvo.getPos_y(), 0.0001);
     }
     @Test
     public void test_nrDoors_volvo(){
-        volvo.getNrDoors();
         assertEquals(4, volvo.getNrDoors(), 0.0001);
 
     }
     @Test
     public void test_nrDoors_saab(){
-        saab.getNrDoors();
         assertEquals(2, saab.getNrDoors(), 0.0001);
     }
     @Test
     public void test_color_volvo(){
-        volvo.getColor();
         assertEquals(Color.black, volvo.getColor());
     }
     @Test
     public void test_color_saab(){
-        saab.getColor();
         assertEquals(Color.red, saab.getColor());
     }
     //Tester för Scania

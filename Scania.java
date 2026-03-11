@@ -1,4 +1,6 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.IOException;
 
 public class Scania extends Car implements Truck{
 
@@ -8,13 +10,15 @@ public class Scania extends Car implements Truck{
  * Can only drive if ramp angle = 0
  *
    **/
-    public Scania(){
+    public Scania(int pos_x, int pos_y) throws IOException {
+        super(pos_x, pos_y);
         nrDoors = 2;
         color = Color.blue;
         enginePower = 130;
         modelName = "Scania";
         stopEngine();
         ramp = new Ramp(70, 0);
+        image = ImageIO.read(DrawPanel.class.getResourceAsStream("/pics/Scania.jpg"));
     }
 
 

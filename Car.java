@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public abstract class Car implements Movable, IworkshopCar{
 
@@ -11,6 +12,17 @@ public abstract class Car implements Movable, IworkshopCar{
     protected double pos_y;
     protected int dx = 1; // Direction x
     protected int dy = 0; // Direction y
+    protected BufferedImage image;
+
+
+    public Car(double pos_x, double pos_y) {
+        this.pos_x = pos_x;
+        this.pos_y = pos_y;
+    }
+
+    public BufferedImage getImage() {
+        return image;
+    }
 
     public int getNrDoors() {
         return nrDoors;
@@ -48,7 +60,7 @@ public abstract class Car implements Movable, IworkshopCar{
     };
 
     /**
-     * Gases if amout is between 0 and 1
+     * Gases if amount is between 0 and 1
      * @param amount
      */
     public void gas(double amount){
@@ -72,17 +84,20 @@ public abstract class Car implements Movable, IworkshopCar{
 
     @Override
     public void move() {
-        pos_x = (getPos_x() + currentSpeed * dx);
-        pos_y = (getPos_y() + currentSpeed * dy);
+        double next_x = (pos_x + currentSpeed * dx);
+        double next_y = (pos_y + currentSpeed * dy);
 
-        if (pos_x >= 800 || pos_x <= 0) {
-            dx = (dx + 180) % 360;
+        if (next_x > 700 || next_x < 0) {
+            dx = -dx;
         }
-        if (pos_y >= 800 || pos_y <= 0){
-            dy = (dy + 180) & 360;
+        if (next_y > 700 || next_y < 0){
+            dy = -dy;
         }
-        pos_x = (getPos_x() + currentSpeed * dx);
-        pos_y = (getPos_y() + currentSpeed * dy);
+        pos_x += currentSpeed * dx;
+        pos_y += currentSpeed * dy;
+//        pos_x = (getPos_x() + currentSpeed * dx);
+//        pos_y = (getPos_y() + currentSpeed * dy);
+
     }
     @Override
     public void turnLeft() {

@@ -1,23 +1,27 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.IOException;
 
 public class Saab95 extends Car{
 
-    private boolean turboOn;
+    private static boolean turboOn;
 
-    public Saab95(){
+    public Saab95(int pos_x, int pos_y) throws IOException {
+        super(pos_x, pos_y);
         nrDoors = 2;
         color = Color.red;
         enginePower = 125;
         turboOn = false;
         modelName = "Saab95";
         stopEngine();
+        image = ImageIO.read(DrawPanel.class.getResourceAsStream("/pics/Saab95.jpg"));
     }
 
-    public void setTurboOn(){
+    public static void setTurboOn(){
         turboOn = true;
     }
 
-    public void setTurboOff(){
+    public static void setTurboOff(){
         turboOn = false;
     }
 
