@@ -22,31 +22,7 @@ public class CarController {
     CarView frame;
 
     CarModel model;
-    // A list of cars, modify if needed
-//    private final ArrayList<Car> cars;
-//    private int workshopX = 300;
-//    private int workshopY = 300;
-//    Workshop<Volvo240> volvoWorkshop = new Workshop<>(10);
 
-
-
-//    public CarController() throws IOException {
-//
-//        cars = new ArrayList<>();
-//
-////        cars.add(new Volvo240(0, 0));
-////        cars.add(new Saab95(0, 200));
-////        cars.add(new Scania(0, 400));
-////        cars.add(new Volvo240(0, 300));
-//
-//        model = new CarModel(cars);
-//
-//        // Start a new view and send a reference of self
-//        frame = new CarView("CarSim 1.0", model, cars);
-//
-//        // Start the timer
-//        timer.start();
-//    }
 
     //methods:
     public CarController(CarModel model){
@@ -72,17 +48,5 @@ public class CarController {
         }
     }
 
-    public void addCar(CarType type){
-        try {
-            model.addCar(type);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
-    public void removeCar(){
-        model.removeCar();
-        frame.drawPanel.repaint();
-    }
 
 }

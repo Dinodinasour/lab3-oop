@@ -10,8 +10,6 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
 
-//    private ArrayList<Car> cars;
-
     private CarModel model;
     BufferedImage volvoWorkshopImage;
     Point volvoWorkshopPoint = new Point(300,300);
@@ -23,7 +21,6 @@ public class DrawPanel extends JPanel{
         this.setBackground(Color.PINK);
 
         this.model = model;
-//        this.cars = cars;
         // Print an error message in case file is not found with a try/catch block
         try {
             // You can remove the "pics" part if running outside of IntelliJ and
@@ -32,9 +29,6 @@ public class DrawPanel extends JPanel{
 
             // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
             // if you are starting in IntelliJ.
-//            saabImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg"));
-//            scaniaImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg"));
-//            volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
             volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
         } catch (IOException ex)
         {
@@ -54,9 +48,7 @@ public class DrawPanel extends JPanel{
                     (int) car.getPos_y(),
                     null);
         }
-//        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
-//        g.drawImage(saabImage, saabPoint.x, saabPoint.y, null);
-//        g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y, null);
+
     }
 }

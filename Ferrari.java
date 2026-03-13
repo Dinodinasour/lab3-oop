@@ -41,8 +41,7 @@ public class Ferrari extends Car implements Truck{
             ramp.setMinAngle();
         }
     }
-    //Behöver lägga till conditions för att bilen som lastas har
-    //närliggande position till Truck.
+
     public void loadCar(Car car){
         if (currentSpeed == 0 && ramp.getAngle() == 45 &&
             !(car instanceof Truck) &&
@@ -61,7 +60,7 @@ public class Ferrari extends Car implements Truck{
         }
     }
 
-    public ArrayList getCarList() {
+    public ArrayList<Car> getCarList() {
         return carList;
     }
 

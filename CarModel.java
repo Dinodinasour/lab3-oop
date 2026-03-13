@@ -14,10 +14,6 @@ public class CarModel {
 
         cars = new ArrayList<>();
 
-//        cars.add(CarFactory.createCar(CarType.VOLVO, 0, 0));
-//        cars.add(CarFactory.createCar(CarType.SAAB, 0, 100));
-//        cars.add(CarFactory.createCar(CarType.SCANIA, 0, 200));
-//        cars.add(CarFactory.createCar(CarType.VOLVO, 0, 300));
     }
     public ArrayList<Car> getCars(){
         return cars;
