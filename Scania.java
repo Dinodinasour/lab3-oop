@@ -10,7 +10,7 @@ public class Scania extends Car implements Truck{
  * Can only drive if ramp angle = 0
  *
    **/
-    public Scania(int pos_x, int pos_y) throws IOException {
+    public Scania(double pos_x, double pos_y) throws IOException {
         super(pos_x, pos_y);
         nrDoors = 2;
         color = Color.blue;

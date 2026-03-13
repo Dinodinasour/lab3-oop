@@ -10,39 +10,20 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel{
 
-    // Just a single image, TODO: Generalize
-    BufferedImage volvoImage;
-    BufferedImage saabImage;
-    BufferedImage scaniaImage;
-    // To keep track of a single car's position
-    Point volvoPoint = new Point();
-    Point saabPoint = new Point(0, 200);
-    Point scaniaPoint = new Point(0, 400);
+//    private ArrayList<Car> cars;
 
-    private ArrayList<Car> cars;
-
+    private CarModel model;
     BufferedImage volvoWorkshopImage;
     Point volvoWorkshopPoint = new Point(300,300);
 
-
-
-    // TODO: Make this general for all cars
-//    void moveit(int x, int y){
-//        volvoPoint.x = x;
-//        volvoPoint.y = y;
-////        for (Car car : cars) {
-////            cars.add(car);
-////        }
-//
-//    }
-
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y, ArrayList<Car> cars) {
+    public DrawPanel(int x, int y, CarModel model) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.PINK);
 
-        this.cars = cars;
+        this.model = model;
+//        this.cars = cars;
         // Print an error message in case file is not found with a try/catch block
         try {
             // You can remove the "pics" part if running outside of IntelliJ and
@@ -67,7 +48,7 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Car car : cars) {
+        for (Car car : model.getCars()) {
             g.drawImage(car.getImage(),
                     (int) car.getPos_x(),
                     (int) car.getPos_y(),
@@ -77,11 +58,5 @@ public class DrawPanel extends JPanel{
        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
 //        g.drawImage(saabImage, saabPoint.x, saabPoint.y, null);
 //        g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y, null);
-//        for (Drawable drawable : drawables) {
-//            g.drawImage(drawable.getImage(),
-//                        drawable.getX(),
-//                        drawable.getY(),
-//                        null);
- //       }
     }
 }

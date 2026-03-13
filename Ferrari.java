@@ -1,4 +1,6 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Ferrari extends Car implements Truck{
@@ -15,7 +17,7 @@ public class Ferrari extends Car implements Truck{
      * Truck cannot load other Trucks
      * Cars that are loaded have same position as the Truck
      */
-    public Ferrari(int pos_x, int pos_y){
+    public Ferrari(double pos_x, double pos_y) throws IOException {
         super(pos_x, pos_y);
         nrDoors = 2;
         color = Color.pink;
@@ -23,6 +25,8 @@ public class Ferrari extends Car implements Truck{
         modelName = "Truck";
         ramp = new Ramp(45, 0);
         carList = new ArrayList();
+        image = ImageIO.read(DrawPanel.class.getResourceAsStream("/pics/Ferrari.jpg"));
+
 
     }
 

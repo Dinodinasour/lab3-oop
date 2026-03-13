@@ -4,6 +4,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -19,8 +20,9 @@ public class CarView extends JFrame{
     private static final int Y = 800;
 
     // The controller member
-    CarController carC;
+    CarModel model;
 
+    CarController carC;
     DrawPanel drawPanel;
 
     JPanel controlPanel = new JPanel();
@@ -29,6 +31,10 @@ public class CarView extends JFrame{
     JSpinner gasSpinner = new JSpinner();
     int gasAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
+
+    CarType[] carTypes = {CarType.VOLVO, CarType.SAAB, CarType.SCANIA, CarType.FERRARI, CarType.RANDOM};
+    JComboBox<CarType> carChoice = new JComboBox<>(carTypes);
+    JLabel carLabel = new JLabel("Type of car");
 
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
@@ -40,15 +46,15 @@ public class CarView extends JFrame{
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
-    ArrayList<Car> cars;
+    JButton addCarButton = new JButton("Add car");
+    JButton removeCarButton = new JButton("Remove car");
+
 
     // Constructor
-    public CarView(String framename, CarController cc, ArrayList<Car> cars){
+    public CarView(String framename, CarModel model){
+        this.model = model;
 
-        this.cars = cars;
-        this.carC = cc;
-
-        drawPanel = new DrawPanel(X, Y-240, cars);
+        drawPanel = new DrawPanel(X, Y-240, model);
         initComponents(framename);
     }
 
@@ -76,91 +82,118 @@ public class CarView extends JFrame{
             }
         });
 
-        gasPanel.setLayout(new BorderLayout());
-        gasPanel.add(gasLabel, BorderLayout.PAGE_START);
-        gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
+        gasPanel.setLayout(new BoxLayout(gasPanel, BoxLayout.Y_AXIS));
+        gasLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        gasSpinner.setAlignmentX(Component.CENTER_ALIGNMENT);
+        carLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        carChoice.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        gasPanel.add(gasLabel);
+        gasPanel.add(gasSpinner);
+        gasPanel.add(carLabel);
+        gasPanel.add(carChoice);
 
         this.add(gasPanel);
 
-        controlPanel.setLayout(new GridLayout(2,4));
+        controlPanel.setLayout(new GridLayout(2,5));
 
         controlPanel.add(gasButton, 0);
         controlPanel.add(turboOnButton, 1);
         controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
-        controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
+        startButton.setBackground(Color.blue);
+        startButton.setForeground(Color.green);
+        controlPanel.add(startButton, 3);
+        addCarButton.setBackground(Color.CYAN);
+        addCarButton.setForeground(Color.black);
+        controlPanel.add(addCarButton, 4);
+        controlPanel.add(brakeButton, 5);
+        controlPanel.add(turboOffButton, 6);
+        controlPanel.add(lowerBedButton, 7);
+        stopButton.setBackground(Color.red);
+        stopButton.setForeground(Color.black);
+        controlPanel.add(stopButton, 8);
+        removeCarButton.setBackground(Color.darkGray);
+        removeCarButton.setForeground(Color.black);
+        controlPanel.add(removeCarButton, 9);
+        controlPanel.setPreferredSize(new Dimension((X-150), 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
 
-
-        startButton.setBackground(Color.blue);
-        startButton.setForeground(Color.green);
-        startButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(startButton);
-
-
-        stopButton.setBackground(Color.red);
-        stopButton.setForeground(Color.black);
-        stopButton.setPreferredSize(new Dimension(X/5-15,200));
-        this.add(stopButton);
 
         // This actionListener is for the gas button only
         // TODO: Create more for each component as necessary
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
+                model.gas(gasAmount);
             }
         });
 
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.brake(gasAmount);
+                model.brake(gasAmount);
             }
         });
 
         turboOnButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.turboOn();
+                model.turboOn();
             }
         });
 
         turboOffButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.turboOff();
+                model.turboOff();
             }
         });
 
         liftBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.liftBed();
+                model.liftBed();
             }
         });
 
         lowerBedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.lowerBed();
+                model.lowerBed();
             }
         });
 
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.startCars();
+                model.startCars();
             }
         });
 
         stopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                carC.stopCars();
+                model.stopCars();
+            }
+        });
+
+        addCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                CarType type = (CarType) carChoice.getSelectedItem();
+                try {
+                    model.addCar(type);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        });
+
+        removeCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.removeCar();
             }
         });
 

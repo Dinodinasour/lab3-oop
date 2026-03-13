@@ -5,10 +5,10 @@ import java.io.IOException;
 public class Volvo240 extends Car{
 
     private final static double trimFactor = 1.25;
-    private int pos_x;
-    private int pos_y;
+    private double pos_x;
+    private double pos_y;
 
-    public Volvo240(int pos_x, int pos_y) throws IOException {
+    public Volvo240(double pos_x, double pos_y) throws IOException {
         super(pos_x, pos_y);
         nrDoors = 4;
         color = Color.black;

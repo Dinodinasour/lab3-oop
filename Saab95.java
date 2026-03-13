@@ -6,7 +6,7 @@ public class Saab95 extends Car{
 
     private static boolean turboOn;
 
-    public Saab95(int pos_x, int pos_y) throws IOException {
+    public Saab95(double pos_x, double pos_y) throws IOException {
         super(pos_x, pos_y);
         nrDoors = 2;
         color = Color.red;
