@@ -24,10 +24,14 @@ public class CarModel {
     }
 
     public void addCar(CarType type) throws IOException{
-        Car car = CarFactory.createCar(type, 0, nextY);
-        cars.add(car);
-        nextY += 100;
+        int maxCars = 6;
+        if (cars.size() < maxCars) {
+            Car car = CarFactory.createCar(type, 0, nextY);
+            cars.add(car);
+            nextY += 100;
+        }
     }
+
     public void removeCar(){
         if (!cars.isEmpty()){
             cars.remove(cars.size()-1);
